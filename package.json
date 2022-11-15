@@ -1,0 +1,46 @@
+{
+  "name": "ngcash-desafio",
+  "version": "1.0.0",
+  "description": "Desafio tecnico para a empresa NG.CASH",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch \".src/**\" .src/server.ts",
+    "start": "ts-node-dev --transpile-only .src/server.ts",
+    "build": "npx tsc",
+    "lint": "eslint ./src --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RafaelCunhaS/NG.CASH-Desafio.git"
+  },
+  "author": "Rafael Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RafaelCunhaS/NG.CASH-Desafio/issues"
+  },
+  "homepage": "https://github.com/RafaelCunhaS/NG.CASH-Desafio#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.8.0",
+    "sequelize": "^6.25.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/node": "^18.11.9",
+    "@types/sequelize": "^4.28.14",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "eslint": "^8.27.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^2.0.20",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.4"
+  }
+}
