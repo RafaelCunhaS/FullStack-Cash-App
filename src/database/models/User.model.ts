@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
+import md5 from 'md5';
 
 class User extends Model {
   public id!: number;
@@ -21,6 +22,7 @@ User.init({
   password: {
     type: DataTypes.STRING,
     allowNull: false,
+    set(value: string) { this.setDataValue('password', md5(value)) }
   },
   accountId: {
     type: DataTypes.INTEGER,

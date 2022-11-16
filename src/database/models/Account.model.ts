@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
-import Transaction from './Transaction';
+import Transaction from './Transaction.model';
 
 class Account extends Model {
   public id!: number;
@@ -16,9 +16,9 @@ Account.init({
   balance: {
     type: DataTypes.DECIMAL(12, 2),
     allowNull: false,
+    defaultValue: 100
   }
 }, {
-  underscored: true,
   sequelize: db,
   modelName: 'accounts',
   timestamps: false,
