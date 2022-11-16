@@ -1,19 +1,19 @@
+const md5 = require('md5')
+
 module.exports = {
   up: async (queryInterface, _Sequelize) => {
     await queryInterface.bulkInsert('users',
       [{
-        id: 1,
-        username: 'João  da Silva',
-        password: 123456,
-        accountId: 1
+        username: 'Joaozinho',
+        password: md5('1234567Z'),
+        account_id: 1
       },
       {
-        id: 2,
-        username: 'Maria Chiquinha',
-        password: 654321,
-        accountId: 2
+        username: 'Mariazinha',
+        password: md5('Z7654321'),
+        account_id: 2
       }
-      ], { timestamps: false })
+      ])
   },
 
   down: async (queryInterface, _Sequelize) => {

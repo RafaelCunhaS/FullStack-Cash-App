@@ -6,16 +6,14 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER
       },
-      debitedAccountId: {
-        field: 'debited_account_id',
+      debited_account_id: {
         type: Sequelize.INTEGER,
         references: { model: 'accounts', key: 'id' },
         allowNull: false,
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
-      creditedAccountId: {
-        field: 'credited_account_id',
+      credited_account_id: {
         type: Sequelize.INTEGER,
         references: { model: 'accounts', key: 'id' },
         allowNull: false,
@@ -24,6 +22,10 @@ module.exports = {
       },
       value: {
         type: Sequelize.DECIMAL(12, 2),
+        allowNull: false
+      },
+      created_at: {
+        type: Sequelize.DATE,
         allowNull: false
       }
     })

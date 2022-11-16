@@ -2,18 +2,18 @@ module.exports = {
   up: async (queryInterface, _Sequelize) => {
     await queryInterface.bulkInsert('transactions',
       [{
-        id: 1,
-        debitedAccountId: 1,
-        creditedAccountId: 2,
-        value: 100
+        debited_account_id: 1,
+        credited_account_id: 2,
+        value: 100,
+        created_at: new Date(2022, 10, 15, 00)
       },
       {
-        id: 2,
-        debitedAccountId: 2,
-        creditedAccountId: 1,
-        value: 100
+        debited_account_id: 2,
+        credited_account_id: 1,
+        value: 100,
+        created_at: new Date(2022, 10, 15, 00)
       }
-      ], { timestamps: true, updatedAt: false })
+      ])
   },
 
   down: async (queryInterface, _Sequelize) => {

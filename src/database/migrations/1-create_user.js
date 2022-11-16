@@ -14,8 +14,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      accountId: {
-        field: 'account_id',
+      account_id: {
         type: Sequelize.INTEGER,
         references: { model: 'accounts', key: 'id' },
         allowNull: false,
