@@ -12,6 +12,12 @@ module.exports = {
         credited_account_id: 1,
         value: 100,
         created_at: '2022-11-17 14:19:00.996 +00:00'
+      },
+      {
+        debited_account_id: 3,
+        credited_account_id: 2,
+        value: 10,
+        created_at: '2022-11-17 14:19:00.996 +00:00'
       }
       ])
   },

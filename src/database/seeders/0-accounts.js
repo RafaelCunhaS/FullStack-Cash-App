@@ -5,7 +5,10 @@ module.exports = {
         balance: 100
       },
       {
-        balance: 100
+        balance: 110
+      },
+      {
+        balance: 90
       }
       ])
   },

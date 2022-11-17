@@ -12,6 +12,11 @@ module.exports = {
         username: 'Mariazinha',
         password: md5('Z7654321'),
         account_id: 2
+      },
+      {
+        username: 'Zezinho',
+        password: md5('ASDFGHJ1'),
+        account_id: 3
       }
       ])
   },
