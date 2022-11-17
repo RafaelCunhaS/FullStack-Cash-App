@@ -24,6 +24,4 @@ Account.init({
   timestamps: false,
 });
 
-Account.hasMany(Transaction, { sourceKey: 'id', as: 'transactions'})
-
 export default Account;
