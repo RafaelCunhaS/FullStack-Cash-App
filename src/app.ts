@@ -4,6 +4,7 @@ import errorMiddleware from './middlewares/errorMiddleware';
 import loginRouter from './routes/loginRouter'
 import userRouter from './routes/userRouter'
 import accountRouter from './routes/accountRouter'
+import transactionRouter from './routes/transactionRouter'
 
 class App {
   public app: express.Express;
@@ -31,6 +32,8 @@ class App {
     this.app.use('/user', userRouter)
 
     this.app.use('/account', accountRouter)
+
+    this.app.use('/transaction', transactionRouter)
 
     this.app.use(errorMiddleware)
   }
