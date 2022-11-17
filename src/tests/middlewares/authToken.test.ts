@@ -29,7 +29,7 @@ describe('Token authorization', () => {
         .set('authorization', 'invalidToken')
     });
 
-    it('Should return the status code 400', () => {
+    it('Should return the status code 401', () => {
       expect(response).to.have.status(401);
     });
     it('The body should have a error message', () => {

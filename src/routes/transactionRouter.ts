@@ -5,7 +5,7 @@ import transactionValidation from '../middlewares/transactionValidation';
 
 const router = Router();
 
-router.post('/', authToken, transactionValidation,
+router.post('/', transactionValidation, authToken,
  (req, res) => transactionFactory().create(req, res));
 
 export default router;
