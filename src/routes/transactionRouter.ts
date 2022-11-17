@@ -8,4 +8,6 @@ const router = Router();
 router.post('/', transactionValidation, authToken,
  (req, res) => transactionFactory().create(req, res));
 
+router.get('/', authToken, (req, res) => transactionFactory().getAll(req, res));
+
 export default router;

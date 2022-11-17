@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 import Transaction from '../database/models/Transaction.model';
 import { IAccountModel } from '../interfaces/Account.interface';
 import { TokenPayload } from '../interfaces/RequestUser.interface';
-import { ITransactionModel, ITransactionService } from '../interfaces/Transaction.interface';
+import { ITransactionModel, ITransactionService, TransactionType } from '../interfaces/Transaction.interface';
 import { IUserModel } from '../interfaces/User.interface';
 import ErrorHandler from '../utils/ErrorHandler';
 
@@ -42,5 +42,21 @@ export default class TransactionService implements ITransactionService {
     const transaction = await this._model.create(cashOutData, cashInData, value)
 
     return transaction
+  }
+
+  async getAll(accountId: number,
+  date: string | undefined, type: TransactionType): Promise<Transaction[]> {
+    let transactions = await this._model.getAll(accountId, date)
+
+    if (type) {
+      if (type === 'cashOut') {
+        transactions = transactions.filter((item) => Number(item.debitedAccountId) === accountId)
+      }
+      else if (type === 'cashIn') {
+        transactions = transactions.filter((item) => Number(item.debitedAccountId) === accountId)
+      }
+    }
+
+    return transactions
   }
 }
