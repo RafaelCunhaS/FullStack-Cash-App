@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+  backend:
+    container_name: /app-ngcash-desafio
+    build: ./
+    ports:
+      - 3001:3001
+    platform: linux/x86_64
+    working_dir: /app-ngcash-desafio
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - APP_PORT=3001
+      - JWT_SECRET=jwt_secret
+      - DB_USER=postgres
+      - DB_PASS=1234
+      - DB_HOST=db
+      - DB_PORT=5432
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+  db:
+    image: postgres:15-alpine
+    container_name: db
+    platform: linux/x86_64
+    ports:
+      - 3002:5432
+    environment:
+      - POSTGRES_PASSWORD=1234
+    restart: 'always'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod", "localhost"]
+      timeout: 10s
+      retries: 5
+    cap_add:
+      - SYS_NICE
