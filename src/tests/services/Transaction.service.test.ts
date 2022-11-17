@@ -37,6 +37,27 @@ describe('TransactionService class', () => {
     id: 1,
     balance: 100
   }
+  const allTransactionsReturn = [{
+		id: 1,
+		debitedAccountId: 1,
+		creditedAccountId: 2,
+		value: 80,
+		created_at: '2022-11-17 14:19:00.996 +00:00'
+	},
+	{
+		id: 2,
+		debitedAccountId: 2,
+		creditedAccountId: 1,
+		value: 50,
+		created_at: '2022-11-18 14:19:00.996 +00:00'
+	}]
+	const transactionFilteredReturn = [{
+		id: 1,
+		debitedAccountId: 1,
+		creditedAccountId: 2,
+		value: 80,
+		created_at: '2022-11-17 14:19:00.996 +00:00'
+	}]
 
 	before(() => {
     sinon.stub(userRepository, 'getByUsername')
@@ -50,13 +71,15 @@ describe('TransactionService class', () => {
       .onCall(2).resolves(cashOutAccountMock as unknown as Account);
 		sinon.stub(transactionRepository, 'create')
       .resolves(transactionReturned as unknown as Transaction);
+    sinon.stub(transactionRepository, 'getAll')
+      .resolves(allTransactionsReturn as unknown as Transaction[]);
 	});
 
 	after(() => {
 		sinon.restore();
 	});
 
-	describe('Making a new Transaction', () => {
+	describe('Making a new sransaction', () => {
     it('If the user tries to make a transaction to his own username, should throw a forbidden error',
     async () => {
 			try {
@@ -97,6 +120,19 @@ describe('TransactionService class', () => {
 		it('If the transaction is successful, should return the transaction info', async () => {
 			const newTransaction = await transactionService.create(cashOutDataMock, 'Mariazinha', 80);
 			expect(newTransaction).to.be.deep.equal(transactionReturned);
+		});
+	});
+
+  describe('Getting all transactions', () => {
+		it('Should return all transactions returned by the model', async () => {
+			const transactions = await transactionService.getAll(1, '', undefined);
+			expect(transactions).to.be.deep.equal(allTransactionsReturn);
+		});
+
+    it('If query type was passed, should filter the transactions returned by the model accordingly',
+    async () => {
+			const transactions = await transactionService.getAll(1, '', 'cashOut');
+			expect(transactions).to.be.deep.equal(transactionFilteredReturn);
 		});
 	});
 });

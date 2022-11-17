@@ -5,7 +5,7 @@ import { app } from '../../app'
 
 chai.use(chaiHttp);
 
-describe.only('Transaction validation', () => {
+describe('Transaction validation', () => {
   describe('If no username is passed', async () => {
     let response: any
 

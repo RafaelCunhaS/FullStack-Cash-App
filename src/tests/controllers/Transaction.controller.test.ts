@@ -30,9 +30,25 @@ describe('TransactionController class', () => {
     value: 80,
     createdAt: '2022-11-17 14:19:00.996 +00:00'
 	}
+  const allTransactionsReturn = [{
+		id: 1,
+		debitedAccountId: 1,
+		creditedAccountId: 2,
+		value: 80,
+		created_at: '2022-11-17 14:19:00.996 +00:00'
+	},
+	{
+		id: 2,
+		debitedAccountId: 2,
+		creditedAccountId: 1,
+		value: 50,
+		created_at: '2022-11-18 14:19:00.996 +00:00'
+	}]
 
   before(() => {
     sinon.stub(transactionService, 'create').resolves(transactionReturned as unknown as Transaction)
+    sinon.stub(transactionService, 'getAll')
+      .resolves(allTransactionsReturn as unknown as Transaction[])
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
@@ -51,6 +67,18 @@ describe('TransactionController class', () => {
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(transactionReturned)).to.be.true;
+    });
+  });
+
+  describe.only('Getting all transactions', () => {
+    it('If it is successful, should return a status 200 and all the transactions info on its body',
+    async () => {
+      req.query = { date: '', type: undefined };
+      req.user = cashOutDataMock
+      await transactionController.getAll(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(allTransactionsReturn)).to.be.true;
     });
   });
 });
