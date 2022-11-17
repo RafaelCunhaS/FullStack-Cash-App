@@ -17,7 +17,7 @@ describe('UserService class', () => {
 		id: 1,
 		username: 'Joaozinho',
 		password: md5('1234567Z'),
-		account_id: 1
+		accountId: 1
 	}
 
 	before(() => {

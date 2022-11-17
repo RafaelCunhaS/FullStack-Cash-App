@@ -22,7 +22,7 @@ describe('UserController class', () => {
 		id: 1,
 		username: 'Joaozinho',
 		password: md5('1234567Z'),
-		account_id: 1
+		accountId: 1
 	}
 
   before(() => {
@@ -36,7 +36,7 @@ describe('UserController class', () => {
     sinon.restore()
   })
 
-  describe.only('Registering a new user', () => {
+  describe('Registering a new user', () => {
     it('If the registration is successful, should return a status 201 and a token on its body', async () => {
       req.body = userMock;
       await userController.create(req, res);
