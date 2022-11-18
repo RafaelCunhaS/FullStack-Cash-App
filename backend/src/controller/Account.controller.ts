@@ -7,8 +7,7 @@ export default class AccountController {
   constructor(private _AccountService: IAccountService) { }
 
   async getBalance(req: RequestUser, res: Response) {
-    const { username } = req.params
-    const { accountId } = req.user as TokenPayload
+    const { username, accountId } = req.user as TokenPayload
     const account = await this._AccountService.getBalance(accountId, username);
 
     res.status(StatusCodes.OK).json(account);

@@ -4,6 +4,6 @@ import authToken from '../middlewares/authToken';
 
 const router = Router();
 
-router.get('/:username', authToken, (req, res) => accountFactory().getBalance(req, res));
+router.get('/', authToken, (req, res) => accountFactory().getBalance(req, res));
 
 export default router;

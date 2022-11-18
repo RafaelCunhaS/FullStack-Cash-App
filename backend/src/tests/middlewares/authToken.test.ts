@@ -10,7 +10,7 @@ describe('Token authorization', () => {
     let response: any
 
     before( async () => {
-      response = await chai.request(app).get('/account/Joaozinho');
+      response = await chai.request(app).get('/account');
     });
 
     it('Should return the status code 401', () => {
@@ -25,7 +25,7 @@ describe('Token authorization', () => {
     let response: any
 
     before( async () => {
-      response = await chai.request(app).get('/account/Joaozinho')
+      response = await chai.request(app).get('/account')
         .set('authorization', 'invalidToken')
     });
 
