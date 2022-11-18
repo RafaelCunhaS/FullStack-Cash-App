@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { FiLock, FiSend, FiUser } from 'react-icons/fi';
+import { object, string } from 'yup';
+import {
+  FiArrowLeft,
+  FiLock,
+  FiSave,
+  FiUser,
+} from 'react-icons/fi';
 import styles from './styles.module.scss';
 import { CustomInput } from '../../components/Input';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,14 +15,16 @@ import api from '../../service/api';
 import { toast } from 'react-toastify';
 import { IDataForm } from '../../interfaces';
 
-const schema = yup.object().shape({
-  username: yup.string().required('Username obrigatório').min(3, 'No mínimo 3 caracteres'),
-  password: yup.string()
+const schema = object({
+  username: string().required('Username obrigatório').min(3, 'No mínimo 3 caracteres'),
+  password: string()
     .required('Senha obrigatória')
-    .min(8, 'No mínimo 8 caracteres'),
+    .min(8, 'No mínimo 8 caracteres')
+    .matches(/[0-9]/, 'Pelo menos um dígito')
+    .matches(/[A-Z]/, 'Pelo menos uma letra maiúscula'),
 }).required();
 
-export function Login() {
+export function Register() {
   const navigate = useNavigate();
   const [isShowingPassword, setIsShowingPassword] = useState(false);
 
@@ -35,13 +42,14 @@ export function Login() {
 
   async function onSubmit(dataForm: IDataForm) {
     try {
-      const { data } = await api.post('/login', dataForm);
-      if (data.token) {
-        navigate('/home');
+      const response = await api.post('/register', dataForm);
+      if (response.status === 201) {
+        toast.success('Usuário cadastrado(a) com sucesso');
+        navigate('/');
       }
     } catch (error: any) {
-        toast.warning(error?.response?.data?.error);
-        console.log(error);
+      toast.warning(error?.response?.data?.error);
+      console.log(error);
     }
   }
 
@@ -55,7 +63,7 @@ export function Login() {
         autoComplete="off"
         autoCapitalize="off"
       >
-        <h2>Login</h2>
+        <h2>Cadastrar</h2>
         <CustomInput
           label="Username"
           Icon={FiUser}
@@ -75,11 +83,11 @@ export function Login() {
         />
 
         <button className={styles.button} type="submit">
-          Enviar <FiSend />
+          Cadastrar <FiSave />
         </button>
 
-        <Link className={styles.link} to="/register">
-          Criar uma conta
+        <Link className={styles.link} to="/">
+          <FiArrowLeft /> Voltar para Login
         </Link>
       </form>
     </div>
