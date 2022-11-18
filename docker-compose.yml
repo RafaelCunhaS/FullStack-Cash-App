@@ -2,7 +2,7 @@ version: '3.9'
 services:
   backend:
     container_name: /app-ngcash-desafio
-    build: ./
+    build: ./backend
     ports:
       - 3001:3001
     platform: linux/x86_64
@@ -31,7 +31,7 @@ services:
       - POSTGRES_PASSWORD=1234
     restart: 'always'
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod", "localhost"]
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
       timeout: 10s
       retries: 5
     cap_add:
