@@ -50,13 +50,34 @@ describe('TransactionService class', () => {
 		creditedAccountId: 1,
 		value: 50,
 		created_at: '2022-11-18 14:19:00.996 +00:00'
+	},
+	{
+		id: 3,
+		debitedAccountId: 3,
+		creditedAccountId: 2,
+		value: 10,
+		created_at: '2022-11-19 14:19:00.996 +00:00'
 	}]
-	const transactionFilteredReturn = [{
+	const transactionMadeReturn = [{
+		id: 2,
+		debitedAccountId: 2,
+		creditedAccountId: 1,
+		value: 50,
+		created_at: '2022-11-18 14:19:00.996 +00:00'
+	}]
+	const transactionReceivedReturn = [{
 		id: 1,
 		debitedAccountId: 1,
 		creditedAccountId: 2,
 		value: 80,
 		created_at: '2022-11-17 14:19:00.996 +00:00'
+	},
+	{
+		id: 3,
+		debitedAccountId: 3,
+		creditedAccountId: 2,
+		value: 10,
+		created_at: '2022-11-19 14:19:00.996 +00:00'
 	}]
 
 	before(() => {
@@ -129,10 +150,16 @@ describe('TransactionService class', () => {
 			expect(transactions).to.be.deep.equal(allTransactionsReturn);
 		});
 
-    it('If query type was passed, should filter the transactions returned by the model accordingly',
+    it('If query type was passed as cashOut, should return the transactions made by the user',
     async () => {
-			const transactions = await transactionService.getAll(1, '', 'cashOut');
-			expect(transactions).to.be.deep.equal(transactionFilteredReturn);
+			const transactions = await transactionService.getAll(2, '', 'cashOut');
+			expect(transactions).to.be.deep.equal(transactionMadeReturn);
+		});
+
+		it('If query type was passed as cashIn, should return the transactions received by the user',
+    async () => {
+			const transactions = await transactionService.getAll(2, '', 'cashIn');
+			expect(transactions).to.be.deep.equal(transactionReceivedReturn);
 		});
 	});
 });

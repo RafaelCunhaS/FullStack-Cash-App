@@ -70,7 +70,7 @@ describe('TransactionController class', () => {
     });
   });
 
-  describe.only('Getting all transactions', () => {
+  describe('Getting all transactions', () => {
     it('If it is successful, should return a status 200 and all the transactions info on its body',
     async () => {
       req.query = { date: '', type: undefined };

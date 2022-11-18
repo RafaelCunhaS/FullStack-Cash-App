@@ -53,7 +53,7 @@ export default class TransactionService implements ITransactionService {
         transactions = transactions.filter((item) => Number(item.debitedAccountId) === accountId)
       }
       else if (type === 'cashIn') {
-        transactions = transactions.filter((item) => Number(item.debitedAccountId) === accountId)
+        transactions = transactions.filter((item) => Number(item.creditedAccountId) === accountId)
       }
     }
 
