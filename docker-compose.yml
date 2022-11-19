@@ -1,12 +1,28 @@
 version: '3.9'
 services:
+  frontend:
+    container_name: app_frontend
+    build: ./frontend
+    ports:
+      - 3000:3000
+    platform: linux/x86_64
+    working_dir: /app-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    # Os `healthcheck` devem garantir que a aplicação
+    # está operacional, antes de liberar o container
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]  # Caso utilize outra porta interna para o front, altere ela aqui também
+      timeout: 10s
+      retries: 5
   backend:
-    container_name: /app-ngcash-desafio
+    container_name: app_backend
     build: ./backend
     ports:
       - 3001:3001
     platform: linux/x86_64
-    working_dir: /app-ngcash-desafio
+    working_dir: /app-backend
     depends_on:
       db:
         condition: service_healthy
