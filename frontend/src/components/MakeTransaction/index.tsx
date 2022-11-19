@@ -24,6 +24,7 @@ export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<INewTransaction>({
     resolver: yupResolver(schema),
@@ -35,6 +36,7 @@ export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
       if (status === 201) {
         toast.success('Transferência feita com sucesso');
         setTransactionSent(true)
+        reset()
       }
     } catch (error: any) {
       console.log(error);

@@ -56,3 +56,17 @@ export interface INewTransaction {
 export interface ITransactionSent {
   setTransactionSent: React.Dispatch<React.SetStateAction<boolean>>
 }
+
+export interface ITransactions {
+  id: number;
+  debitedAccountId: string;
+  creditedAccountId: string;
+  value: number;
+  createdAt: Date;
+  debitedUser: {
+    username: string
+  },
+  creditedUser: {
+    username: string
+  }
+}
