@@ -10,11 +10,10 @@ import {
 } from 'react-icons/fi';
 import styles from './styles.module.scss';
 import { CustomInput } from '../../components/Input';
-import { Link, useNavigate } from 'react-router-dom';
-import { api } from '../../services/api';
-import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 import { IDataForm } from '../../interfaces';
 import { Button } from '../../components/Button';
+import { useAuth } from '../../hooks/auth';
 
 const schema = object({
   username: string().required('Username obrigatório').min(3, 'No mínimo 3 caracteres'),
@@ -26,7 +25,7 @@ const schema = object({
 }).required();
 
 export function Register() {
-  const navigate = useNavigate();
+  const { registerUser } = useAuth()
   const [isShowingPassword, setIsShowingPassword] = useState(false);
 
   const {
@@ -42,16 +41,7 @@ export function Register() {
   }
 
   async function onSubmit(dataForm: IDataForm) {
-    try {
-      const response = await api.post('/register', dataForm);
-      if (response.status === 201) {
-        toast.success('Usuário cadastrado(a) com sucesso');
-        navigate('/');
-      }
-    } catch (error: any) {
-      toast.warning(error?.response?.data?.error);
-      console.log(error);
-    }
+    registerUser(dataForm)
   }
 
   return (

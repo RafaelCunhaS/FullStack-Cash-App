@@ -39,6 +39,23 @@ function AuthProvider({ children }: IAuthProviderProps) {
     }
   }
 
+  async function registerUser({ username, password }: ISignIn) {
+    try {
+      const { data } = await api.post('/user', {
+        username,
+        password,
+      });
+      if (!data.error && data.token) {
+        toast.success('Usuário cadastrado(a) com sucesso');
+        setInformation(data.token);
+      } else {
+        toast.warning('Nome de usuário já cadastrado(a)');
+      }
+    } catch (error: any) {
+      toast.warning('Nome de usuário já cadastrado(a)');
+    }
+  }
+
   function setInformation(token: string) {
     const { username } = jwt_decode(token) as IPayload;
 
@@ -64,7 +81,7 @@ function AuthProvider({ children }: IAuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, signIn, signOut, registerUser }}>
       {children}
     </AuthContext.Provider>
   );

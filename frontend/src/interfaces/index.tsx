@@ -35,6 +35,7 @@ export interface IAuthContextData {
   user: IUser;
   signIn: (credential: ISignIn) => Promise<void>;
   signOut: () => void;
+  registerUser: (credential: ISignIn) => Promise<void>;
 }
 
 export interface IAuthProviderProps {
