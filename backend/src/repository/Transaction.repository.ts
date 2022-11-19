@@ -1,6 +1,6 @@
 import Transaction from '../database/models/Transaction.model';
 import { TokenPayload } from '../interfaces/RequestUser.interface';
-import { ITransactionModel, TransactionType } from '../interfaces/Transaction.interface';
+import { ITransactionModel } from '../interfaces/Transaction.interface';
 import db from '../database/models';
 import Account from '../database/models/Account.model';
 import { Op } from 'sequelize'
@@ -34,14 +34,17 @@ export default class TransactionRepository implements ITransactionModel {
   }
 
   async getAll(accountId: number, date: string | undefined): Promise<Transaction[]> {
-    const transactions = !date ? await this._model.findAll({ where: {
+    const transactions = !date ?
+    await this._model.findAll({ include: [{ association: 'debitedUser', attributes: ['username'] },
+    { association: 'creditedUser', attributes: ['username'] }], where: {
       [Op.or]: [{debitedAccountId: accountId}, {creditedAccountId: accountId}],
-    }}) : (
-    await this._model.findAll({ where: { [Op.and]: [
+    }})
+    :
+    await this._model.findAll({ include: [{ association: 'debitedUser', attributes: ['username'] },
+    { association: 'creditedUser', attributes: ['username'] }], where: { [Op.and]: [
       { [Op.or]: [{debitedAccountId: accountId}, {creditedAccountId: accountId}] },
       sequelize.where(sequelize.fn('date', sequelize.col('created_at')), '=', date),
       ] }})
-    )
 
     return transactions
   }

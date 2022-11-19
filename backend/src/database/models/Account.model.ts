@@ -1,6 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
-import Transaction from './Transaction.model';
 
 class Account extends Model {
   public id!: number;
