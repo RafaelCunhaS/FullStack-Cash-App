@@ -47,3 +47,12 @@ export interface IAuthProviderProps {
 export interface IHeader {
   balance: number;
 }
+
+export interface INewTransaction {
+  username: string;
+  value: number;
+}
+
+export interface ITransactionSent {
+  setTransactionSent: React.Dispatch<React.SetStateAction<boolean>>
+}

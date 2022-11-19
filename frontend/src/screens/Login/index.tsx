@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { FiLock, FiSend, FiUser } from 'react-icons/fi';
 import styles from './styles.module.scss';
 import { CustomInput } from '../../components/Input';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { IDataForm } from '../../interfaces';
 import { useAuth } from '../../hooks/auth';
 import { Button } from '../../components/Button';
@@ -19,7 +19,6 @@ const schema = yup.object().shape({
 
 export function Login() {
   const { signIn } = useAuth()
-  const navigate = useNavigate();
   const [isShowingPassword, setIsShowingPassword] = useState(false);
 
   const {
