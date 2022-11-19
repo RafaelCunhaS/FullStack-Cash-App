@@ -46,10 +46,10 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, ICustomInput> = (
         />
 
         {isPassword &&
-          (!isShowingPassword ? (
-            <FiEyeOff size={24} onClick={showPassword} />
+          (isShowingPassword ? (
+            <FiEye size={24} onClick={showPassword} /> 
             ) : (
-            <FiEye size={24} onClick={showPassword} />
+              <FiEyeOff size={24} onClick={showPassword} />
           ))}
       </div>
 

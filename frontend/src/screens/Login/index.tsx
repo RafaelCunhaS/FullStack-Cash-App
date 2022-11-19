@@ -6,9 +6,9 @@ import { FiLock, FiSend, FiUser } from 'react-icons/fi';
 import styles from './styles.module.scss';
 import { CustomInput } from '../../components/Input';
 import { Link, useNavigate } from 'react-router-dom';
-import api from '../../service/api';
-import { toast } from 'react-toastify';
 import { IDataForm } from '../../interfaces';
+import { useAuth } from '../../hooks/auth';
+import { Button } from '../../components/Button';
 
 const schema = yup.object().shape({
   username: yup.string().required('Username obrigatório').min(3, 'No mínimo 3 caracteres'),
@@ -18,6 +18,7 @@ const schema = yup.object().shape({
 }).required();
 
 export function Login() {
+  const { signIn } = useAuth()
   const navigate = useNavigate();
   const [isShowingPassword, setIsShowingPassword] = useState(false);
 
@@ -34,15 +35,7 @@ export function Login() {
   }
 
   async function onSubmit(dataForm: IDataForm) {
-    try {
-      const { data } = await api.post('/login', dataForm);
-      if (data.token) {
-        navigate('/home');
-      }
-    } catch (error: any) {
-        toast.warning(error?.response?.data?.error);
-        console.log(error);
-    }
+    signIn(dataForm)
   }
 
   return (
@@ -74,9 +67,7 @@ export function Login() {
           isShowingPassword={isShowingPassword}
         />
 
-        <button className={styles.button} type="submit">
-          Enviar <FiSend />
-        </button>
+        <Button title="Entrar" icon={<FiSend />} type="submit" />
 
         <Link className={styles.link} to="/register">
           Criar uma conta

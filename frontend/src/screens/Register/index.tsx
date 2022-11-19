@@ -11,9 +11,10 @@ import {
 import styles from './styles.module.scss';
 import { CustomInput } from '../../components/Input';
 import { Link, useNavigate } from 'react-router-dom';
-import api from '../../service/api';
+import { api } from '../../services/api';
 import { toast } from 'react-toastify';
 import { IDataForm } from '../../interfaces';
+import { Button } from '../../components/Button';
 
 const schema = object({
   username: string().required('Username obrigatório').min(3, 'No mínimo 3 caracteres'),
@@ -71,6 +72,7 @@ export function Register() {
           error={errors.username}
         />
 
+        <span>*8 caracteres com pelo menos 1 dígito e uma letra maiúscula</span>
         <CustomInput
           type={isShowingPassword ? 'text' : 'password'}
           label="Senha"
@@ -82,9 +84,7 @@ export function Register() {
           isShowingPassword={isShowingPassword}
         />
 
-        <button className={styles.button} type="submit">
-          Cadastrar <FiSave />
-        </button>
+        <Button title="Cadastrar" icon={<FiSave />} type="submit" />
 
         <Link className={styles.link} to="/">
           <FiArrowLeft /> Voltar para Login
