@@ -12,7 +12,7 @@ export default class TransactionController {
     const transaction = await this
       ._transactionService.create(cashOutData, cashInUsername, Number(value));
 
-    res.status(StatusCodes.OK).json(transaction);
+    res.status(StatusCodes.CREATED).json(transaction);
   }
 
   async getAll(req: RequestUser, res: Response) {
