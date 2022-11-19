@@ -57,7 +57,7 @@ function AuthProvider({ children }: IAuthProviderProps) {
   }
 
   function setInformation(token: string) {
-    const { username } = jwt_decode(token) as IPayload;
+    const { data: { username }} = jwt_decode(token) as IPayload;    
 
     setUser({
       token: token,

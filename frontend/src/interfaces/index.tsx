@@ -27,8 +27,10 @@ export interface ISignIn {
 }
 
 export interface IPayload {
-  id: number;
-  username: string;
+  data: {
+    id: number;
+    username: string;
+  }
 }
 
 export interface IAuthContextData {
@@ -40,4 +42,8 @@ export interface IAuthContextData {
 
 export interface IAuthProviderProps {
   children: ReactNode;
+}
+
+export interface IHeader {
+  balance: number;
 }
