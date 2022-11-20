@@ -59,13 +59,13 @@ describe('TransactionController class', () => {
   })
 
   describe('Making a new transaction', () => {
-    it('If it is successful, should return a status 200 and the transaction info on its body',
+    it('If it is successful, should return a status 201 and the transaction info on its body',
     async () => {
       req.body = { username: 'Mariazinha', value: 80 };
       req.user = cashOutDataMock
       await transactionController.create(req, res);
 
-      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
+      expect((res.status as sinon.SinonStub).calledWith(201)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(transactionReturned)).to.be.true;
     });
   });

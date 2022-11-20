@@ -41,18 +41,18 @@ function AuthProvider({ children }: IAuthProviderProps) {
 
   async function registerUser({ username, password }: ISignIn) {
     try {
-      const { data } = await api.post('/user', {
+      const { data } = await api.post('/register', {
         username,
         password,
       });
       if (!data.error && data.token) {
-        toast.success('Usuário cadastrado(a) com sucesso');
+        toast.success('Usuário(a) cadastrado com sucesso');
         setInformation(data.token);
       } else {
-        toast.warning('Nome de usuário já cadastrado(a)');
+        toast.warning('Nome de usuário(a) já cadastrado');
       }
     } catch (error: any) {
-      toast.warning('Nome de usuário já cadastrado(a)');
+      toast.warning('Nome de usuário(a) já cadastrado');
     }
   }
 

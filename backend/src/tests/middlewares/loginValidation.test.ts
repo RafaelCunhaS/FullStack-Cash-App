@@ -10,7 +10,7 @@ describe('Login/Register validation', () => {
     let response: any
 
     before( async () => {
-      response = await chai.request(app).post('/user')
+      response = await chai.request(app).post('/login')
         .send({ username: 'Jo', password: '1234567Z' });
     });
 
@@ -27,7 +27,7 @@ describe('Login/Register validation', () => {
     let response: any
 
     before( async () => {
-      response = await chai.request(app).post('/user')
+      response = await chai.request(app).post('/login')
         .send({ username: 'Joaozinho', password: '123456' });
     });
 
@@ -44,7 +44,7 @@ describe('Login/Register validation', () => {
     let response: any
 
     before( async () => {
-      response = await chai.request(app).post('/user')
+      response = await chai.request(app).post('/login')
         .send({ username: 'Joaozinho', password: 'INVALIDPASS' });
     });
 
@@ -61,7 +61,7 @@ describe('Login/Register validation', () => {
     let response: any
 
     before( async () => {
-      response = await chai.request(app).post('/user')
+      response = await chai.request(app).post('/login')
         .send({ username: 'Joaozinho', password: '12345678' });
     });
 

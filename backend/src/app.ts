@@ -29,7 +29,7 @@ class App {
 
     this.app.use('/login', loginRouter)
 
-    this.app.use('/user', userRouter)
+    this.app.use('/register', userRouter)
 
     this.app.use('/account', accountRouter)
 
