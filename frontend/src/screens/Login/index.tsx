@@ -39,14 +39,13 @@ export function Login() {
 
   return (
     <div className={styles.container}>
-      <h1>Cash App</h1>
-
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={styles.form}
         autoComplete="off"
         autoCapitalize="off"
       >
+        <h1>Cash App</h1>
         <h2>Login</h2>
         <CustomInput
           label="Username"
