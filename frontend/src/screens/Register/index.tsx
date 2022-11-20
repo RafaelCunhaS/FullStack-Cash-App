@@ -46,14 +46,13 @@ export function Register() {
 
   return (
     <div className={styles.container}>
-      <h1>Cash App</h1>
-
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={styles.form}
         autoComplete="off"
         autoCapitalize="off"
       >
+        <h1>Cash App</h1>
         <h2>Cadastrar</h2>
         <CustomInput
           label="Username"
@@ -62,10 +61,10 @@ export function Register() {
           error={errors.username}
         />
 
-        <span>*8 caracteres com pelo menos 1 dígito e uma letra maiúscula</span>
         <CustomInput
           type={isShowingPassword ? 'text' : 'password'}
-          label="Senha"
+          label="Senha (8 caracteres com pelo menos 1 dígito e uma letra maiúscula)"
+          placeholder="Senha"
           Icon={FiLock}
           {...register('password')}
           error={errors.password}
@@ -77,7 +76,7 @@ export function Register() {
         <Button title="Cadastrar" icon={<FiSave />} type="submit" />
 
         <Link className={styles.link} to="/">
-          <FiArrowLeft /> Voltar para Login
+          <span><FiArrowLeft /></span> Voltar para Login
         </Link>
       </form>
     </div>
