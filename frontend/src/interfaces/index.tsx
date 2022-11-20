@@ -62,7 +62,7 @@ export interface ITransactions {
   debitedAccountId: string;
   creditedAccountId: string;
   value: number;
-  createdAt: Date;
+  createdAt: string;
   debitedUser: {
     username: string
   },
