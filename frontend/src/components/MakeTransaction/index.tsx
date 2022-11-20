@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { CustomInput } from '../Input';
 import { FcMoneyTransfer } from 'react-icons/fc'
 import { FaMoneyBillWave } from 'react-icons/fa'
+import styles from './styles.module.scss'
 
 export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
   const username = localStorage.getItem('username');
@@ -47,7 +48,7 @@ export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
   return (
     <form
         onSubmit={handleSubmit(onSubmit)}
-        className=''
+        className={styles.form}
         autoComplete="off"
         autoCapitalize="off"
       >
