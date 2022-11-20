@@ -54,7 +54,8 @@ export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
       >
         <h2>Nova Transferência</h2>
         <CustomInput
-          label="Username"
+          label="Destinatário(a)"
+          placeholder='Username'
           Icon={FiUser}
           {...register('username')}
           error={errors.username}
