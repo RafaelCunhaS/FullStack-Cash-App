@@ -6,6 +6,7 @@ import styles from './styles.module.scss';
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, ICustomInput> = (
   {
     label,
+    placeholder,
     Icon,
     error,
     isPassword = false,
@@ -40,7 +41,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, ICustomInput> = (
           {...rest}
           ref={ref}
           className={styles.input}
-          placeholder={label}
+          placeholder={placeholder ?? label}
           onFocus={handleInputFocus}
           onBlur={(event) => handleInputBlur(event)}
         />
