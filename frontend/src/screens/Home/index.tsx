@@ -5,6 +5,8 @@ import { MakeTransaction } from '../../components/MakeTransaction';
 import { TransactionsTable } from '../../components/TransactionsTable';
 import { api } from '../../services/api';
 import { MdAttachMoney } from 'react-icons/md'
+import styles from './styles.module.scss'
+import { FiArrowLeft } from 'react-icons/fi';
 
 export function Home() {
   const [balance, setBalance] = useState(0)
@@ -22,22 +24,23 @@ export function Home() {
   }, [transactionSent])
 
   return (
-    <div className=".container">
-      <Header balance={balance} />
-      
-      {!makeTransaction ? <TransactionsTable /> :
-      <MakeTransaction setTransactionSent={settransactionSent} /> }
-
-      {!makeTransaction ? 
-      <Button
-      title="Fazer nova transferência"
-      icon={<MdAttachMoney />}
-      onClick={() => setmakeTransaction(!makeTransaction)}
-      /> :
-      <Button
-      title="Ver todas transferências"
-      onClick={() => setmakeTransaction(!makeTransaction) }
-      /> }
+    <div className={styles.container}>
+      <div className={styles.box}>
+        <Header balance={balance} />
+        
+        {!makeTransaction ? <TransactionsTable /> :
+        <MakeTransaction setTransactionSent={settransactionSent} /> }
+  
+        {!makeTransaction ? 
+        <Button
+        title="Nova transferência"
+        icon={<MdAttachMoney />}
+        onClick={() => setmakeTransaction(!makeTransaction)}
+        /> :
+        <p className={styles.link} onClick={() => setmakeTransaction(!makeTransaction)}>
+          <span><FiArrowLeft /></span> Ver todas transferências
+        </p> }
+      </div>
     </div>
   );
 }
