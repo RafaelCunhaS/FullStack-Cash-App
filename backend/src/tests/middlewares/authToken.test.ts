@@ -33,7 +33,7 @@ describe('Token authorization', () => {
       expect(response).to.have.status(401);
     });
     it('The body should have a error message', () => {
-      expect(response.body.message).to.be.equal('Token must be a valid token');
+      expect(response.body.message).to.be.equal('Expired or invalid token');
     });
   });
 });
