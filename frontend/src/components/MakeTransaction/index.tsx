@@ -41,7 +41,12 @@ export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
       }
     } catch (error: any) {
       console.log(error);
-      toast.warning(error.response.data.message);
+      if (error.response.data.message.includes('enough')) {
+        toast.warning('Dinheiro em conta insuficiente')
+      } else if (error.response.data.message.includes('Username')) {
+        toast.warning('Usuário(a) não existe')
+      }
+      else toast.warning(error.response.data.message);
     }
   }
 
