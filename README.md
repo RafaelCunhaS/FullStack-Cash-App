@@ -16,16 +16,6 @@
     # Suba os containers com o docker-compose (o app estará rodando em plano de fundo em seu  localhost na porta 3000 (http://localhost:3000/) quando a construção acabar)
     $ docker-compose up -d --build
 
-    # Os seguindo usuários(as) já estarão no banco de dados do app para teste de Login e Transações
-    username: Joaozinho
-    password: 1234567Z
-
-    username: Mariazinha
-    password: Z7654321
-
-    username: Zezinho
-    password: ASDFGHJ1
-
     # Quando terminar de utilizar o app, desfaça os containers criados
     $ docker-compose down --remove-orphans
 ```
