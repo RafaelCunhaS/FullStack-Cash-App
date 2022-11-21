@@ -13,7 +13,7 @@
     # Vá até a pasta criada
     $ cd NG.CASH-Desafio
 
-    # Suba os containers com o docker-compose (o app estará rodando em plano de fundo em seu  localhost na porta 3000 (http://localhost:3000/) quando a construção acabar)
+    # Suba os containers com o docker-compose (o app estará rodando em plano de fundo em seu localhost na porta 3000 (http://localhost:3000/) quando a construção acabar)
     $ docker-compose up -d --build
 
     # Quando terminar de utilizar o app, desfaça os containers criados
