@@ -20,6 +20,6 @@ export default async (req: RequestUser, _res: Response, next: NextFunction) => {
 
     next();
   } catch (err) {
-    throw new ErrorHandler(StatusCodes.UNAUTHORIZED, 'Token must be a valid token');
+    throw new ErrorHandler(StatusCodes.UNAUTHORIZED, 'Expired or invalid token');
   }
 }
