@@ -1,0 +1,174 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Cash App API",
+    "description": "Backend API for app"
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/login/": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Requires a username and a password",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "Joaozinho"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "example": "1234567Z"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/register/": {
+      "post": {
+        "description": "Creates a new user",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Requires a username and a password",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "Jhon Doe"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "example": "1234567Y"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/account/": {
+      "get": {
+        "description": "",
+        "security": {
+          "bearerAuth": {
+              "type": "http",
+              "scheme": "bearer",
+              "bearerFormat": "JWT"
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Requires a token"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/transaction/": {
+      "post": {
+        "description": "Creates a new transaction",
+        "security": {
+          "bearerAuth": {
+              "type": "http",
+              "scheme": "bearer",
+              "bearerFormat": "JWT"
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Requires a token"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Requires a username and a value",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "Mariazinha"
+                },
+                "value": {
+                  "type": "number",
+                  "example": 15
+                }
+              },
+              "required": [
+                "username",
+                "value"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      },
+      "get": {
+        "description": "",
+        "security": {
+          "bearerAuth": {
+              "type": "http",
+              "scheme": "bearer",
+              "bearerFormat": "JWT"
+          }
+        },
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Requires a token"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "description": "Get transaction by its date (yyyy-MM-dd)"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string",
+            "description": "Type of transactions can be passed (cashIn or cashOut)"
+          }
+        ],
+        "responses": {}
+      }
+    }
+  }
+}

@@ -5,6 +5,8 @@ import loginRouter from './routes/loginRouter'
 import userRouter from './routes/userRouter'
 import accountRouter from './routes/accountRouter'
 import transactionRouter from './routes/transactionRouter'
+import swaggerDocs from './utils/swagger_output.json';
+import swaggerUi from "swagger-ui-express";
 
 class App {
   public app: express.Express;
@@ -34,6 +36,8 @@ class App {
     this.app.use('/account', accountRouter)
 
     this.app.use('/transaction', transactionRouter)
+
+    this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
     this.app.use(errorMiddleware)
   }
