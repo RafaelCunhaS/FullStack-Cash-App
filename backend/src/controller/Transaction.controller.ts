@@ -17,9 +17,9 @@ export default class TransactionController {
 
   async getAll(req: RequestUser, res: Response) {
     const { accountId } = req.user as TokenPayload
-    const { date, type } = req.query as unknown as IQueryReturn
+    const { dates, type } = req.query as unknown as IQueryReturn
     
-    const transactions = await this._transactionService.getAll(accountId, date, type);
+    const transactions = await this._transactionService.getAll(accountId, dates, type);
 
     res.status(StatusCodes.OK).json(transactions);
   }

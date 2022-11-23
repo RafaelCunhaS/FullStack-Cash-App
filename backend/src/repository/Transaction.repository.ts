@@ -4,7 +4,6 @@ import { ITransactionModel } from '../interfaces/Transaction.interface';
 import db from '../database/models';
 import Account from '../database/models/Account.model';
 import { Op } from 'sequelize'
-import sequelize from 'sequelize';
 
 export default class TransactionRepository implements ITransactionModel {
   constructor(private _model = Transaction, private _accountModel = Account) { }
@@ -33,8 +32,11 @@ export default class TransactionRepository implements ITransactionModel {
     return transaction
   }
 
-  async getAll(accountId: number, date: string | undefined): Promise<Transaction[]> {
-    const transactions = !date ?
+  async getAll(accountId: number,
+    dates: [string, string] | undefined): Promise<Transaction[]> {
+    const [start, end] = dates || []    
+
+    const transactions = !dates ?
     await this._model.findAll({ include: [{ association: 'debitedUser', attributes: ['username'] },
     { association: 'creditedUser', attributes: ['username'] }], where: {
       [Op.or]: [{debitedAccountId: accountId}, {creditedAccountId: accountId}],
@@ -43,7 +45,8 @@ export default class TransactionRepository implements ITransactionModel {
     await this._model.findAll({ include: [{ association: 'debitedUser', attributes: ['username'] },
     { association: 'creditedUser', attributes: ['username'] }], where: { [Op.and]: [
       { [Op.or]: [{debitedAccountId: accountId}, {creditedAccountId: accountId}] },
-      sequelize.where(sequelize.fn('date', sequelize.col('created_at')), '=', date),
+      { createdAt: { [Op.between]: [start,
+        end && new Date(new Date(end).setDate(new Date(end).getDate() + 1))] } },
       ] }})
 
     return transactions

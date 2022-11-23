@@ -45,8 +45,9 @@ export default class TransactionService implements ITransactionService {
   }
 
   async getAll(accountId: number,
-  date: string | undefined, type: TransactionType): Promise<Transaction[]> {
-    let transactions = await this._model.getAll(accountId, date)
+  dates: [string, string] | undefined,
+  type: TransactionType): Promise<Transaction[]> {
+    let transactions = await this._model.getAll(accountId, dates)
 
     if (type) {
       if (type === 'cashOut') {
