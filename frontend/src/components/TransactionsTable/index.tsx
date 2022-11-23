@@ -8,14 +8,17 @@ import styles from './styles.module.scss'
 export function TransactionsTable() {
   const username = localStorage.getItem('username') as string
   const [transactions, setTransactions] = useState<ITransactions[]>([] as ITransactions[])
-  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
   const [typeToFilter, setTypeToFilter] = useState('');
 
-  async function getTransactions(dateQuery?: string, typeQuery?: string) {
+  async function getTransactions(dateQuery?: (string | null)[] | undefined, typeQuery?: string) {
     let url = '/transaction'
-    if (dateQuery) url += `?date=${dateQuery}`
+    if (dateQuery) {
+      url += `?dates=${dateQuery[0]}&dates=${dateQuery[1]}`
+    }
     if (typeQuery) {
-      url += url.includes('?') ?`&type=${typeQuery}` : `?type=${typeQuery}`
+      url += url.includes('?') ? `&type=${typeQuery}` : `?type=${typeQuery}`
     }
 
     const { data } = await api.get<ITransactions[]>(url)
@@ -24,9 +27,11 @@ export function TransactionsTable() {
   }
 
   useEffect(() => {
-    const date = startDate ? startDate.toISOString().split("T")[0] : undefined
-    getTransactions(date, typeToFilter)
-  }, [startDate, typeToFilter])
+    const dates = endDate ? [startDate && startDate.toISOString().split("T")[0],
+    endDate && endDate.toISOString().split("T")[0]] : undefined
+
+    getTransactions(dates, typeToFilter)
+  }, [endDate, typeToFilter])
 
   function handleChange(event: any) {
     setTypeToFilter(event.target.value)
@@ -34,49 +39,56 @@ export function TransactionsTable() {
 
   function resetRadioState() {
     setTypeToFilter('')
-    setStartDate(undefined)
+    setStartDate(null)
+    setEndDate(null)
     getTransactions()
+  }
+
+  function onChangeHandler(dates: any) {
+    const [start, end] = dates
+    setStartDate(start);
+    setEndDate(end);
   }
 
   return (
     <div className={styles.container}>
-      <h2>Transações</h2>
+      <h2>Transactions</h2>
       <div>
-        <h4>Procurar transações pela data:</h4>
+        <h4>Search by a time period:</h4>
         <DatePicker
+          selectsRange
           className={styles.calendar}
           selected={startDate}
-          dateFormat="dd/MM/yyyy"
-          onChange={(date: Date) => setStartDate(date)}
+          startDate={startDate}
+          endDate={endDate}
           maxDate={new Date()}
-          placeholderText={`${new Date().toLocaleString('pt-BR', {
-                  day: '2-digit',
-                  month: 'numeric',
-                  year: 'numeric',
-                })}`}
+          onChange={onChangeHandler}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Select a period"
         />
       </div>
       <div>
-        <h4>Filtrar por transações:</h4>
-        <label>
-          <input
-            type="radio"
-            value="cashOut"
-            checked={typeToFilter === 'cashOut'}
-            onChange={handleChange}
-            placeholder=""
-          />
-          Enviadas
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="cashIn"
-            checked={typeToFilter === 'cashIn'}
-            onChange={handleChange}
-          />
-          Recebidas
-        </label>
+        <h4>Filter by transactions:</h4>
+        <div className={styles.inputContainer}>
+          <label>
+            <input
+              type="radio"
+              value="cashOut"
+              checked={typeToFilter === 'cashOut'}
+              onChange={handleChange}
+            />
+            Sent
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="cashIn"
+              checked={typeToFilter === 'cashIn'}
+              onChange={handleChange}
+            />
+            Received
+          </label>
+        </div>
       </div>
       <div>
         <button
@@ -84,38 +96,38 @@ export function TransactionsTable() {
           onClick={resetRadioState}
           className={styles.reset}
         >
-          Resetar filtros
+          Reset
         </button>
       </div>
       <div className={styles.tableContainer}>
         <table>
           <thead>
             <tr>
-              <th>Tipo</th>
-              <th>De / Para</th>
-              <th>Valor</th>
-              <th>Data</th>
-              <th>Horário</th>
+              <th>Type</th>
+              <th>From / To</th>
+              <th>Value</th>
+              <th>Date</th>
+              <th>Time</th>
             </tr>
           </thead>
           <tbody>
             {transactions.map(({ id, debitedUser, creditedUser, value, createdAt}) => (
               <tr key={ id }>
-                <td>{ debitedUser.username === username ? 'Enviada' : 'Recebida' }</td>
+                <td>{ debitedUser.username === username ? 'Sent' : 'Received' }</td>
                 <td>{ debitedUser.username === username ?
                 creditedUser.username :
                 debitedUser.username }</td>
                 <td>{ `R$ ${value}` }</td>
-                <td>{ new Date(createdAt).toLocaleString('pt-BR', {
+                <td>{ new Date(createdAt).toLocaleString('en-US', {
                     day: '2-digit',
                     month: 'numeric',
                     year: 'numeric',
                   }) }
                 </td>
-                <td>{ new Date(createdAt).toLocaleString('pt-BR', {
+                <td>{ new Date(createdAt).toLocaleString('en-US', {
                     hour: 'numeric',
                     minute: 'numeric',
-                  }).replace(':', 'h') }m
+                  })}
                 </td>
               </tr>
             ))}
