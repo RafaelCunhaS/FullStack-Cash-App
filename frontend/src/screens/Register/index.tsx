@@ -16,12 +16,12 @@ import { Button } from '../../components/Button';
 import { useAuth } from '../../hooks/auth';
 
 const schema = object({
-  username: string().required('Username obrigatório').min(3, 'No mínimo 3 caracteres'),
+  username: string().required('Username required').min(3),
   password: string()
-    .required('Senha obrigatória')
-    .min(8, 'No mínimo 8 caracteres')
-    .matches(/[0-9]/, 'Pelo menos um dígito')
-    .matches(/[A-Z]/, 'Pelo menos uma letra maiúscula'),
+    .required('Password required')
+    .min(8)
+    .matches(/[0-9]/, 'At least one digit')
+    .matches(/[A-Z]/, 'At least one uppercase letter'),
 }).required();
 
 export function Register() {
@@ -53,7 +53,7 @@ export function Register() {
         autoCapitalize="off"
       >
         <h1>Cash App</h1>
-        <h2>Cadastrar</h2>
+        <h2>Register</h2>
         <CustomInput
           label="Username"
           Icon={FiUser}
@@ -63,8 +63,8 @@ export function Register() {
 
         <CustomInput
           type={isShowingPassword ? 'text' : 'password'}
-          label="Senha (8 caracteres com pelo menos 1 dígito e uma letra maiúscula)"
-          placeholder="Senha"
+          label="Password (8 characters with at least one digit and one uppercase letter)"
+          placeholder="Password"
           Icon={FiLock}
           {...register('password')}
           error={errors.password}
@@ -73,10 +73,10 @@ export function Register() {
           isShowingPassword={isShowingPassword}
         />
 
-        <Button title="Cadastrar" icon={<FiSave />} type="submit" />
+        <Button title="Register" icon={<FiSave />} type="submit" />
 
         <Link className={styles.link} to="/">
-          <span><FiArrowLeft /></span> Voltar para Login
+          <span><FiArrowLeft /></span> Login
         </Link>
       </form>
     </div>

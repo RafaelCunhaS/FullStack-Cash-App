@@ -11,11 +11,11 @@ export function Header({ balance }: IHeader) {
   return (
     <div className={styles.header}>
       <p className="">
-        Olá, <span>{username}</span>
+        Hello, <span>{username}</span>
       </p>
-      <p>Saldo<span className={styles.icon}><GiWallet /></span>: {`R$ ${balance}`}</p>
+      <p>Balance<span className={styles.icon}><GiWallet /></span>: {`R$ ${balance}`}</p>
       <div className={styles.logout}>
-        <p onClick={signOut}>Sair <span className={styles.icon}><FiLogOut /></span></p>
+        <p onClick={signOut}>Logout <span className={styles.icon}><FiLogOut /></span></p>
       </div>
     </div>
   );

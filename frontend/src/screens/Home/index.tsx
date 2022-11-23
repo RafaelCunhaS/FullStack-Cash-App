@@ -33,12 +33,12 @@ export function Home() {
   
         {!makeTransaction ? 
         <Button
-        title="Nova transferência"
+        title="New Transaction"
         icon={<MdAttachMoney />}
         onClick={() => setmakeTransaction(!makeTransaction)}
         /> :
         <p className={styles.link} onClick={() => setmakeTransaction(!makeTransaction)}>
-          <span><FiArrowLeft /></span> Ver todas transferências
+          <span><FiArrowLeft /></span> See all transactions
         </p> }
       </div>
     </div>

@@ -11,10 +11,10 @@ import { useAuth } from '../../hooks/auth';
 import { Button } from '../../components/Button';
 
 const schema = yup.object().shape({
-  username: yup.string().required('Username obrigatório').min(3, 'No mínimo 3 caracteres'),
+  username: yup.string().required('Username required').min(3),
   password: yup.string()
-    .required('Senha obrigatória')
-    .min(8, 'No mínimo 8 caracteres'),
+    .required('Password required')
+    .min(8),
 }).required();
 
 export function Login() {
@@ -56,7 +56,7 @@ export function Login() {
 
         <CustomInput
           type={isShowingPassword ? 'text' : 'password'}
-          label="Senha"
+          label="Password"
           Icon={FiLock}
           {...register('password')}
           error={errors.password}
@@ -65,10 +65,10 @@ export function Login() {
           isShowingPassword={isShowingPassword}
         />
 
-        <Button title="Entrar" icon={<FiSend />} type="submit" />
+        <Button title="Login" icon={<FiSend />} type="submit" />
 
         <Link className={styles.link} to="/register">
-          Criar uma conta
+          Register
         </Link>
       </form>
     </div>

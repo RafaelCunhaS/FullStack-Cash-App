@@ -32,10 +32,10 @@ function AuthProvider({ children }: IAuthProviderProps) {
       if (!data.error && data.token) {
         setInformation(data.token);
       } else {
-        toast.warning('E-mail ou senha incorreto');
+        toast.warning('Incorrect username or password');
       }
     } catch (error) {
-      toast.warning('E-mail ou senha incorreto');
+      toast.warning('Incorrect username or password');
     }
   }
 
@@ -46,13 +46,13 @@ function AuthProvider({ children }: IAuthProviderProps) {
         password,
       });
       if (!data.error && data.token) {
-        toast.success('Usuário(a) cadastrado com sucesso');
+        toast.success('User successfully registered');
         setInformation(data.token);
       } else {
-        toast.warning('Nome de usuário(a) já cadastrado');
+        toast.warning('Username already registered');
       }
     } catch (error: any) {
-      toast.warning('Nome de usuário(a) já cadastrado');
+      toast.warning('Username already registered');
     }
   }
 

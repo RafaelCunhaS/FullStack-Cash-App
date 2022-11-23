@@ -15,11 +15,11 @@ export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
   const username = localStorage.getItem('username');
 
   const schema = yup.object().shape({
-    username: yup.string().required('Username obrigatório')
-      .notOneOf([username], 'Não é possível fazer uma transferência para o mesmo usuário'),
+    username: yup.string().required('Receiver username required')
+      .notOneOf([username], 'Not possible to make a transaction to the same user'),
     value: yup.number()
-      .required('Insira um valor')
-      .min(1, 'Valor tem que ser maior que 0'),
+      .required('Insert a value')
+      .min(0.01, 'Value needs to be greater than 0'),
   }).required();
 
   const {
@@ -35,18 +35,13 @@ export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
     try {
       const { status } = await api.post('/transaction', dataForm);
       if (status === 201) {
-        toast.success('Transferência feita com sucesso');
+        toast.success('Transaction successful');
         setTransactionSent(true)
         reset()
       }
     } catch (error: any) {
       console.log(error);
-      if (error.response.data.message.includes('enough')) {
-        toast.warning('Dinheiro em conta insuficiente')
-      } else if (error.response.data.message.includes('Username')) {
-        toast.warning('Usuário(a) não existe')
-      }
-      else toast.warning(error.response.data.message);
+      toast.warning(error.response.data.message);
     }
   }
 
@@ -59,8 +54,8 @@ export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
       >
         <h2>Nova Transferência</h2>
         <CustomInput
-          label="Destinatário(a)"
-          placeholder='Username'
+          label="Receiver"
+          placeholder="Username"
           Icon={FiUser}
           {...register('username')}
           error={errors.username}
@@ -69,7 +64,8 @@ export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
         <CustomInput
           type="number"
           step="0.01"
-          label="Valor"
+          label="Value"
+          placeholder='0,00'
           onKeyPress={(event) => {
             if (!/[0-9.,]/.test(event.key)) {
               event.preventDefault();
@@ -80,7 +76,7 @@ export function MakeTransaction({ setTransactionSent }: ITransactionSent) {
           error={errors.value}
         />
 
-        <Button title="Fazer Transferência" icon={<FcMoneyTransfer />} type="submit" />
+        <Button title="Make Transaction" icon={<FcMoneyTransfer />} type="submit" />
       </form>
   );
 }
