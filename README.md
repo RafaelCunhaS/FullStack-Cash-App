@@ -1,7 +1,7 @@
 # Cash App
 
 <details>
-  <summary markdown="span"><strong>:brazil: Português</strong></summary><br />
+  <summary markdown="span"><strong>Português :brazil:</strong></summary><br />
 
 ### 📋 Dependencias para rodar o app
 
@@ -11,10 +11,10 @@
 
 ```bash
     # Clone o repositório
-    $ git clone git@github.com:RafaelCunhaS/NG.CASH-Desafio.git
+    $ git clone git@github.com:RafaelCunhaS/FullStack-Cash-App.git
 
     # Vá até a pasta criada
-    $ cd NG.CASH-Desafio
+    $ cd FullStack-Cash-App
 
     # Suba os containers com o docker-compose, o app estará rodando em plano de fundo em seu 
     # localhost na porta 3000 (http://localhost:3000/) quando a construção acabar
@@ -38,7 +38,7 @@
 </details>
 
 <details>
-  <summary markdown="span"><strong>:us: English</strong></summary><br />
+  <summary markdown="span"><strong>English :us:</strong></summary><br />
 
 ### 📋 Dependencies to run the app
 
@@ -48,10 +48,10 @@
 
 ```bash
     # Clone the repository
-    $ git clone git@github.com:RafaelCunhaS/NG.CASH-Desafio.git
+    $ git clone git@github.com:RafaelCunhaS/FullStack-Cash-App.git
 
     # Go into the project's directory
-    $ cd NG.CASH-Desafio
+    $ cd FullStack-Cash-App
 
     # Build the project (the project will be running on the background when the build is finished)
     $ docker-compose up -d --build
