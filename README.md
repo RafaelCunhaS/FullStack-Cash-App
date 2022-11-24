@@ -1,4 +1,7 @@
-# Desafio NG.CASH
+# Cash App
+
+<details>
+  <summary markdown="span"><strong>:brazil: Português</strong></summary><br />
 
 ### 📋 Dependencias para rodar o app
 
@@ -31,3 +34,41 @@
 - username: Mariazinha | password: Z7654321
 
 - username: Zezinho | password: ASDFGHJ1
+<br />
+</details>
+
+<details>
+  <summary markdown="span"><strong>:us: English</strong></summary><br />
+
+### 📋 Dependencies to run the app
+
+- Docker-compose -> Your docker-compose needs to be at version 1.29 or higher [Veja a documentação para instruções de como instalar/atualizar](https://docs.docker.com/compose/install/)
+
+### 🔧 How to run the app
+
+```bash
+    # Clone the repository
+    $ git clone git@github.com:RafaelCunhaS/NG.CASH-Desafio.git
+
+    # Go into the project's directory
+    $ cd NG.CASH-Desafio
+
+    # Build the project (the project will be running on the background when the build is finished)
+    $ docker-compose up -d --build
+
+    # When you're finished with the app, remove the containers previously built
+    $ docker-compose down --remove-orphans
+```
+
+### When the build is finished the project will be running on your  [localhost:3000](http://localhost:3000/)
+
+### Backend API documentation made with Swagger will be on [localhost:3001/docs](http://localhost:3001/docs/)
+
+#### The following users will be already registered on the db for test cases
+- username: Joaozinho | password: 1234567Z
+
+- username: Mariazinha | password: Z7654321
+
+- username: Zezinho | password: ASDFGHJ1
+<br />
+</details>
