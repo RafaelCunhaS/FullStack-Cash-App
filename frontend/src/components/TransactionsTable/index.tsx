@@ -15,7 +15,7 @@ export function TransactionsTable() {
   async function getTransactions(dateQuery?: (string | null)[] | undefined, typeQuery?: string) {
     let url = '/transaction'
     if (dateQuery) {
-      url += `?dates=${dateQuery[0]}&dates=${dateQuery[1]}`
+      url += `?dateStart=${dateQuery[0]}&dateEnd=${dateQuery[1]}`
     }
     if (typeQuery) {
       url += url.includes('?') ? `&type=${typeQuery}` : `?type=${typeQuery}`
