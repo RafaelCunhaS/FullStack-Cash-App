@@ -37,7 +37,17 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Returns a token"
+          },
+          "400": {
+            "description": "Bad Request. Invalid username or password"
+          },
+          "401": {
+            "description": "Unauthorized. Incorrect username or password"
+          }
+        }
       }
     },
     "/register/": {
@@ -68,8 +78,18 @@
             }
           }
         ],
-        "responses": {}
-      }
+        "responses": {
+            "201": {
+              "description": "Returns a token"
+            },
+            "400": {
+              "description": "Bad Request. Invalid username or password"
+            },
+            "409": {
+              "description": "Conflict. Username already registered"
+            }
+          }
+        }
     },
     "/account/": {
       "get": {
@@ -90,7 +110,17 @@
             "description": "Requires a token"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Returns the user account info"
+          },
+          "401": {
+            "description": "Unauthorized. Account unavailable for user"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
       }
     },
     "/transaction/": {
@@ -134,7 +164,17 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "Returns the created transaction info"
+          },
+          "400": {
+            "description": "Bad Request. Username to receive the cash in doesn't exists"
+          },
+          "403": {
+            "description": "Forbidden. Cannot make transactions between the same user or not enough money in the user"
+          }
+        }
       },
       "get": {
         "description": "",
@@ -154,11 +194,18 @@
             "description": "Requires a token"
           },
           {
-            "name": "date",
+            "name": "dateStart",
             "in": "query",
             "type": "string",
             "format": "date",
-            "description": "Get transaction by its date (yyyy-MM-dd)"
+            "description": "Sets the start date of period (yyyy-MM-dd). Must be used together with `dateEnd`"
+          },
+          {
+            "name": "dateEnd",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "description": "Sets the end date of period (yyyy-MM-dd). Must be used together with `dateStart`"
           },
           {
             "name": "type",
@@ -167,7 +214,11 @@
             "description": "Type of transactions can be passed (cashIn or cashOut)"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Returns all transactions info involving the user"
+          }
+        }
       }
     }
   }
