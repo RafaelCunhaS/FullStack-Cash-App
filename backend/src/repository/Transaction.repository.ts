@@ -32,11 +32,10 @@ export default class TransactionRepository implements ITransactionModel {
     return transaction
   }
 
-  async getAll(accountId: number,
-    dates: [string, string] | undefined): Promise<Transaction[]> {
-    const [start, end] = dates || []    
+  async getAll(accountId: number, dateStart: string | undefined,
+    dateEnd: string | undefined): Promise<Transaction[]> {    
 
-    const transactions = !dates ?
+    const transactions = !dateStart && !dateEnd ?
     await this._model.findAll({ include: [{ association: 'debitedUser', attributes: ['username'] },
     { association: 'creditedUser', attributes: ['username'] }], where: {
       [Op.or]: [{debitedAccountId: accountId}, {creditedAccountId: accountId}],
@@ -45,8 +44,8 @@ export default class TransactionRepository implements ITransactionModel {
     await this._model.findAll({ include: [{ association: 'debitedUser', attributes: ['username'] },
     { association: 'creditedUser', attributes: ['username'] }], where: { [Op.and]: [
       { [Op.or]: [{debitedAccountId: accountId}, {creditedAccountId: accountId}] },
-      { createdAt: { [Op.between]: [start,
-        end && new Date(new Date(end).setDate(new Date(end).getDate() + 1))] } },
+      { createdAt: { [Op.between]: [dateStart,
+        dateEnd && new Date(new Date(dateEnd).setDate(new Date(dateEnd).getDate() + 1))] } },
       ] }})
 
     return transactions
