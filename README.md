@@ -27,6 +27,8 @@
 ### Quando o processo de construção dos containers terminar, o app estará rodando em [localhost:3000](http://localhost:3000/)
 
 ### Documentação da API do backend estará em [localhost:3001/docs](http://localhost:3001/docs/)
+  
+### O banco de dados estará rodando na porta _3002_
 
 #### Os seguintes usuários(as) já estarão no banco de dados do app para teste de Login e Transações
 - username: Joaozinho | password: 1234567Z
@@ -63,6 +65,8 @@
 ### When the build is finished the project will be running on your  [localhost:3000](http://localhost:3000/)
 
 ### Backend API documentation made with Swagger will be on [localhost:3001/docs](http://localhost:3001/docs/)
+  
+### The database will be running on port _3002_
 
 #### The following users will be already registered on the db for test cases
 - username: Joaozinho | password: 1234567Z
