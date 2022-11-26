@@ -3,7 +3,7 @@
 <details>
   <summary markdown="span"><strong>Português :brazil:</strong></summary><br />
 
-### 📋 Dependencias para rodar o app
+### 📋 Dependências para rodar o app
 
 - Docker-compose -> Seu docker-compose precisa estar pelo menos na versão 1.29 [Veja a documentação para instruções de como instalar/atualizar](https://docs.docker.com/compose/install/)
 
